@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5faff;
+    color: #333;
+}
+
+.container {
+    max-width: 960px;
+    margin: auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+h1, h2 {
+    color: #3A59D1;
+    margin-bottom: 20px;
+}
+
+.upload-section,
+.results-section,
+.add-student {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #f0f8ff;
+    border-left: 5px solid #3D90D7;
+    border-radius: 10px;
+}
+
+.results-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.present, .absent {
+    flex: 1 1 45%;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 6px solid;
+}
+
+.present {
+    border-color: #7AC6D2;
+}
+
+.absent {
+    border-color: #B5FCCD;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    background: #f9f9f9;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    color: #333;
+    font-weight: 500;
+}
+
+button,
+input[type="submit"],
+a.button {
+    background: #3A59D1;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+button:hover,
+input[type="submit"]:hover,
+a.button:hover {
+    background: #3D90D7;
+}
+
+button:focus,
+input[type="submit"]:focus,
+a.button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(58, 89, 209, 0.3);
+}
+
+.actions {
+    margin-top: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 14px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #EAF3FC;
+    text-align: left;
+    color: #3A59D1;
+}
+
+tr:hover {
+    background-color: #f1f6ff;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #3A59D1;
+}
+
+.form-group input[type="text"],
+.form-group input[type="file"],
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #3D90D7;
+    outline: none;
+}
+
+a {
+    color: #3A59D1;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* css for mobile devices to uload image */
+
+/* Mobile upload options */
+.upload-options {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .btn-primary {
+    flex: 1;
+    min-width: 150px;
+    background: #3D90D7;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .btn-primary:hover {
+    background: #028E7B;
+    transform: translateY(-2px);
+  }
+  
+  /* Image preview */
+  .image-preview-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  
+  .image-preview {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .image-preview img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+  }
+  
+  .image-preview span {
+    display: block;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Mobile-specific styles */
+  @media (max-width: 576px) {
+    .upload-options {
+      flex-direction: column;
+    }
+    
+    .btn-primary{
+      width: 100%;
+    }
+    
+    .image-preview-container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }

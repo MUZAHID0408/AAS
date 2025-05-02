@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Students - {{ section.name }} - Automated Attendance System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Manage Students: {{ section.name }}</h1>
+            <div class="nav-links">
+                <a href="{{ url_for('dashboard') }}">Back to Dashboard</a> |
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </div>
+        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+        
+        <div class="action-buttons">
+            <a href="{{ url_for('add_student', section_id=section.id) }}" class="btn-primary">Add New Student</a>
+        </div>
+        
+        <div class="manage-students">
+            <form method="POST" action="{{ url_for('update_section_students', section_id=section.id) }}">
+                <h2>Select Students for this Section</h2>
+                
+                <div class="student-list">
+                    {% if students %}
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Select</th>
+                                    <th>Roll Number</th>
+                                    <th>Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for student in students %}
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" id="student-{{ student.id }}" name="students" value="{{ student.id }}" 
+                                               {% if student.in_section %}checked{% endif %}>
+                                    </td>
+                                    <td>{{ student.roll_no }}</td>
+                                    <td>
+                                        <label for="student-{{ student.id }}">{{ student.name }}</label>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No students are available. <a href="{{ url_for('add_student') }}">Add students first</a>.</p>
+                    {% endif %}
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!-- templates/add_student.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Student</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Add New Student</h1>
+        
+        <form method="POST" action="{{ url_for('add_student') }}" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Student Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="roll_no">Roll Number:</label>
+                <input type="text" id="roll_no" name="roll_no" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="photo">Student Photo:</label>
+                <input type="file" id="photo" name="photo" accept="image/*" required>
+            </div>
+            
+            <button type="submit">Add Student</button>
+            <a href="{{ url_for('index') }}" class="button">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

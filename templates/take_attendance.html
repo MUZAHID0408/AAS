@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Take Attendance - {{ section.name }} - Automated Attendance System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Take Attendance: {{ section.name }}</h1>
+            <div class="nav-links">
+                <a href="{{ url_for('dashboard') }}">Back to Dashboard</a> |
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </div>
+        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+        
+        <div class="upload-section">
+            <h2>Upload Group Photos</h2>
+            <form method="POST" action="{{ url_for('process_attendance', section_id=section.id) }}" enctype="multipart/form-data" id="attendanceForm">
+                <input type="file" name="files" multiple accept="image/*" id="imageInput" required>
+                <input type="date" name="date" value="{{ datetime.now().strftime('%Y-%m-%d') }}">
+                <button type="submit" class="btn-primary">Process Attendance</button>
+            </form>
+        </div>
+        
+        <div class="upload-options">
+            <!-- Hidden file input -->
+            <input type="file" id="fileInput" name="files" accept="image/*" multiple style="display: none;">
+            
+            <!-- Custom buttons -->
+            <button type="button" class="btn-secondary" onclick="openCamera()">
+                Take Photo
+            </button>
+            <button type="button" class="btn-secondary" onclick="openGallery()">
+                Choose from Gallery
+            </button>
+        </div>
+
+        <!-- Preview container -->
+        <div id="imagePreview" class="image-preview-container"></div>
+    </div>
+
+    <script>
+        document.getElementById('attendanceForm').addEventListener('submit', function(event) {
+            const imageInput = document.getElementById('imageInput');
+    
+            if (!imageInput.files.length) {
+                event.preventDefault(); // stop form submission
+                alert("Please upload at least one group photo before processing attendance.");
+            }
+        });
+
+        function openCamera() {
+            // Implementation for camera access
+            alert("Camera functionality would be implemented here");
+        }
+
+        function openGallery() {
+            document.getElementById('fileInput').click();
+        }
+    </script>
+</body>
+</html>

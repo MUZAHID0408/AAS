@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance Results - {{ section.name }} - {{ date }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Attendance Results</h1>
+            <div class="section-info">
+                <p>Section: {{ section.name }}</p>
+                <p>Date: {{ date }}</p>
+            </div>
+            <div class="nav-links">
+                {% if session.teacher_id %}
+                    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a> |
+                    <a href="{{ url_for('attendance_history', section_id=section.id) }}">View Attendance History</a> |
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('index') }}">Back to Home</a>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="results-summary">
+            <div class="present-stats">
+                <h2>Present Students ({{ present|length }})</h2>
+                {% if present %}
+                    <ul>
+                        {% for roll, name in present %}
+                            <li>{{ name }} ({{ roll }})</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No students were recognized as present.</p>
+                {% endif %}
+            </div>
+            
+            <div class="absent-stats">
+                <h2>Absent Students ({{ absent|length }})</h2>
+                {% if absent %}
+                    <ul>
+                        {% for roll, name in absent %}
+                            <li>{{ name }} ({{ roll }})</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>All students are present.</p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="{{ url_for('edit_attendance', section_id=section.id, date=date) }}" class="btn-primary">Edit Attendance</a>
+            {% if session.teacher_id %}
+                <a href="{{ url_for('take_attendance', section_id=section.id) }}" class="btn-secondary">Take New Attendance</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

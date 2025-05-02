@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Dashboard - Automated Attendance System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Teacher Dashboard</h1>
+            <div class="user-info">
+                Welcome, {{ teacher.name }} | <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </div>
+        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+        
+        <div class="dashboard-sections">
+            <div class="section-list">
+                <h2>Your Sections</h2>
+                
+                {% if sections %}
+                    <ul class="sections">
+                        {% for section in sections %}
+                        <li>
+                            <div class="section-info">
+                                <span class="section-name">{{ section.name }}</span>
+                                <div class="section-actions">
+                                    <a href="{{ url_for('take_attendance', section_id=section.id) }}" class="btn-action">Take Attendance</a>
+                                    <a href="{{ url_for('attendance_history', section_id=section.id) }}" class="btn-action">View History</a>
+                                    <a href="{{ url_for('manage_students', section_id=section.id) }}" class="btn-action">Manage Students</a>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>You haven't created any sections yet.</p>
+                {% endif %}
+                
+                <div class="add-section">
+                    <a href="{{ url_for('add_section') }}" class="btn-primary">Add New Section</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

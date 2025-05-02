@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance Details - {{ date }} - {{ section.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Attendance Details for {{ date }}</h1>
+            <div class="nav-links">
+                <a href="{{ url_for('attendance_history', section_id=section.id) }}">Back to History</a> |
+                <a href="{{ url_for('dashboard') }}">Dashboard</a> |
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </div>
+        
+        <div class="attendance-summary">
+            <div class="summary-stats">
+                <div class="stat-box">
+                    <div class="stat-label">Total Students</div>
+                    <div class="stat-value">{{ total_students }}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Present</div>
+                    <div class="stat-value">{{ present_count }}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Absent</div>
+                    <div class="stat-value">{{ absent_count }}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Attendance Rate</div>
+                    <div class="stat-value">{{ attendance_rate }}%</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="attendance-lists">
+            <div class="present-list">
+                <h2>Present Students</h2>
+                {% if present_students %}
+                <ul>
+                    {% for student in present_students %}
+                    <li>{{ student.name }} ({{ student.roll_no }})</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No students were marked present.</p>
+                {% endif %}
+            </div>
+            
+            <div class="absent-list">
+                <h2>Absent Students</h2>
+                {% if absent_students %}
+                <ul>
+                    {% for student in absent_students %}
+                    <li>{{ student.name }} ({{ student.roll_no }})</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No students were marked absent.</p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="{{ url_for('edit_attendance', section_id=section.id, date=date) }}" class="btn-primary">Edit Attendance</a>
+        </div>
+    </div>
+</body>
+</html>

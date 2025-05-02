@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Section - Automated Attendance System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Add New Section</h1>
+        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+        
+        <div class="section-form">
+            <form method="POST" action="{{ url_for('add_section') }}">
+                <div class="form-group">
+                    <label for="name">Section Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <h3>Add Students to Section</h3>
+                <div class="student-selection">
+                    {% if students %}
+                        {% for student in students %}
+                        <div class="student-checkbox">
+                            <input type="checkbox" id="student-{{ student.id }}" name="students" value="{{ student.id }}">
+                            <label for="student-{{ student.id }}">{{ student.name }} ({{ student.roll_no }})</label>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No students available. <a href="{{ url_for('add_student') }}">Add students first</a>.</p>
+                    {% endif %}
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Create Section</button>
+                    <a href="{{ url_for('dashboard') }}" class="btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

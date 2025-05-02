@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Automated Attendance System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Automated Attendance System</h1>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+        
+        <div class="login-options">
+            <div class="login-card">
+                <h2>Teacher Access</h2>
+                <p>Login to manage your sections and take attendance.</p>
+                <a href="{{ url_for('login') }}" class="btn-primary">Teacher Login</a>
+            </div>
+        </div>
+
+        <div class="admin-option">
+            <h3>Administration</h3>
+            <div class="admin-links">
+                <a href="{{ url_for('add_student') }}">Add New Student</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

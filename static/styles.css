@@ -236,6 +236,11 @@ tr:hover {
     background-color: rgba(122, 198, 210, 0.1);
 }
 
+.add-section{
+    margin:40px 0px 40px 0px
+}
+
+
 /* Card Styles */
 .login-card {
     background-color: var(--white);

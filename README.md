@@ -16,5 +16,5 @@ Teachers can manage sections, enroll students with their photos, take attendance
 - **Flask** – Python web framework for backend logic.  
 - **face_recognition** – Facial recognition and matching.  
 - **OpenCV** – Image processing and manipulation.  
-- **SQLite / MySQL** – Database for storing user, student, and attendance data.  
+- **SQLite/ SQLAlchemy** – Database for storing user, student, and attendance data.  
 - **HTML, CSS, JavaScript** – Frontend interface.  
